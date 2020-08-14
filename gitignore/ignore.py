@@ -2,12 +2,15 @@ import requests
 from bs4 import BeautifulSoup
 import os.path
 import pickle
+import pathlib
 
+
+HERE = pathlib.Path(__file__).parent
 
 all_git_ignore = []
 
 def _fetchAllModuleData():
-	if os.path.isfile('./cache_links.txt'):
+	if os.path.isfile(f"{HERE}/cache_links.txt"):
 		return "cache_links"
 	else:
 		r = requests.get("https://github.com/github/gitignore/")
@@ -18,7 +21,7 @@ def _fetchAllModuleData():
 		        module = i.attrs['href'].replace('blob/','')
 		        final_module_url = f'https://raw.githubusercontent.com{module}'
 		        all_git_ignore.append(final_module_url)
-		with open("cache_links.txt", "wb") as pickle_file:
+		with open(f"{HERE}/cache_links.txt", "wb") as pickle_file:
 			pickle.dump(all_git_ignore,pickle_file)
 		return "done"
 
@@ -26,10 +29,10 @@ def _fetchAllModuleData():
 def createModuleGitignore(moduleInput):
 	callback = _fetchAllModuleData()
 	if callback == "cache_links":
-		with open("cache_links.txt", "rb") as pickle_file:
+		with open(f"{HERE}/cache_links.txt", "rb") as pickle_file:
 			all_git_ignore = pickle.load(pickle_file)
 	elif callback == "done":
-		with open("cache_links.txt", "rb") as pickle_file:
+		with open(f"{HERE}/cache_links.txt", "rb") as pickle_file:
 			all_git_ignore = pickle.load(pickle_file)
 
 	moduleInput = moduleInput.lower()

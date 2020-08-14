@@ -13,7 +13,7 @@ README = (HERE/"README.md").read_text()
 
 setup(
     name="git-autoignore",
-    version="1.0.0",
+    version="1.0.1",
     description="Create gitignore template with lighten Speed",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -27,6 +27,7 @@ setup(
     install_requires=[
         "requests",
         "beautifulsoup4",
+        "lxml",
     ],
     entry_points={
         "console_scripts": [
