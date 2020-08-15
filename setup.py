@@ -13,14 +13,14 @@ README = (HERE/"README.md").read_text()
 
 setup(
     name="git-autoignore",
-    version="1.0.1",
+    version="1.0.3",
     description="Create gitignore template with lighten Speed",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/Imdeepmehta/gitignore",
+    url="https://github.com/Imdeepmehta/git-autoignore",
     author="Imdeepmehta",
     license='MIT',
-    author_email="itsdeepmeht25@gmail.com",
+    author_email="itsdeepmehta25@gmail.com",
     packages=["gitignore"],
     include_package_data = True,
     

@@ -37,11 +37,21 @@ def createModuleGitignore(moduleInput):
 
 	moduleInput = moduleInput.lower()
 	download_module_url = ''
+	Flag = False
 	for module in all_git_ignore:
 	    if moduleInput in module[58:-10].lower():
-	        download_module_url = module
-	data = requests.get(download_module_url)
-	data = data.content.decode()
-	fileName = download_module_url[-10:]
-	with open(fileName, 'w') as modFile:
-		modFile.write(data)
+	    	Flag = True
+	    	download_module_url = module
+	    	data = requests.get(download_module_url)
+	    	data = data.content.decode()
+	    	fileName = download_module_url[-10:]
+	    	with open(fileName, 'w') as modFile:
+	    		modFile.write(data)
+	    	break
+
+	if Flag == False:
+		print("ERROR: type -h for help")
+	else:
+		print(f"Sucessfully add .gitignore file for {moduleInput}")
+
+	
